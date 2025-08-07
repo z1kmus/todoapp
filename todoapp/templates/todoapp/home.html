@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="nav">
+    {% if request.user.is_authenticated %}
+    <h1 class="title">{{request.user.username}}</h1>
+    <a class="logout_btn" href="{% url 'logout' %}"><img src="{% static 'images/logout_purple.png' %}" alt="Logout"></a>
+    {% else %}
+    <a class="title login_btn" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+<div class="container">
+    <h1 class="title"><a style="color: inherit;" href="{% url 'home' %}">TODO LIST</a></h1>
+    <div class="navbar">
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="s_field" id="search" placeholder="Search note...">
+            <label for="search" class="search__btn">
+                {% if dark_mode %}
+                <img src="{% static './images/sun_icon.png' %}" alt="Search icon">
+                {% else %}
+                <img src="{% static './images/search_icon.svg' %}" alt="Search icon">
+                {% endif %}
+
+            </label>
+        </form>
+        <a class="create__btn" href="{% url 'create' %}">Create</a>
+        {% if dark_mode %}
+        <a class="color__mode" href="{% url 'mode' %}"><img src="{% static './images/search_icon_dark.png' %}"
+                alt="Moon icon"></a>
+        {% else %}
+        <a class="color__mode" href="{% url 'mode' %}"><img src="{% static './images/moon_icon.svg' %}"
+                alt="Moon icon"></a>
+        {% endif %}
+    </div>
+    <div class="notes">
+        {% if notes.count != 0 %}
+        {% for note in notes %}
+        <div class="note">
+            <div>
+                <a href="{% url 'click' note.id %}">
+                    {% if note.active %}
+                    <span class="check__box checked">
+                        {% if dark_mode %}
+                        <img src="{% static './images/check_icon_dark.png' %}" alt="check">
+                        {% else %}
+                        <img src="{% static './images/check_icon.png' %}" alt="check">
+                        {% endif %}
+                    </span>
+                    <span class="note_name checked_text">{{note.note}}</span>
+                    {% else %}
+                    <span class="check__box">
+                        {% if dark_mode %}
+                        <img src="{% static './images/check_icon_dark.png' %}" alt="check">
+                        {% else %}
+                        <img src="{% static './images/check_icon.png' %}" alt="check">
+                        {% endif %}
+                    </span>
+                    <span class="note_name">{{note.note}}</span>
+                    {% endif %}
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'update' note.id %}"><span class="edit__btn"></span></a>
+                <a href="{% url 'delete' note.id %}"><span class="delete__btn"></span></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        {% if dark_mode %}
+        <img src="{% static 'images/bg_img_dark.png' %}" alt="Empty">
+        {% else %}
+        <img src="{% static 'images/bg-img.png' %}" alt="Empty">
+        {% endif %}
+
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

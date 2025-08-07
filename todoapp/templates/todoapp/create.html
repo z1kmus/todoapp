@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="box">
+    {% if create %}
+    <h1 class="title">New Note</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="note" placeholder="Input your note...">
+        <div class="box__footer">
+            <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+            <button type="submit">Apply</button>
+        </div>
+    </form>
+    {% else %}
+    <h1 class="title">Edit Note</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="note" value="{{note.note}}">
+        <div class="box__footer">
+            <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+            <button type="submit">Apply</button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

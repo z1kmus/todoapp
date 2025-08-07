@@ -1,0 +1,51 @@
+body {
+    background-color: #252525;
+    color: #f7f7f7;
+}
+
+.title,
+.signup__labels,
+.box p {
+    color: #f7f7f7;
+}
+
+.search__btn {
+    background-color: #252525;
+    border-color: #f7f7f7;
+}
+
+.navbar form input {
+    color: #f7f7f7;
+    border-color: #f7f7f7;
+}
+
+.navbar form input::placeholder {
+    color: #666;
+}
+
+.note_name {
+    color: #f7f7f7;
+}
+
+.checked_text {
+    color: #ffffff50;
+}
+
+.box {
+    background-color: #252525;
+    border-color: #f7f7f7;
+}
+
+.box__footer a {
+    background-color: #252525;
+}
+
+.box form input {
+    background-color: #252525;
+    color: #f7f7f7;
+    border-color: #f7f7f7;
+}
+
+.box form input::placeholder {
+    color: #666;
+}

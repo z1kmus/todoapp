@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+{% if page %}
+<div class="box">
+    <div class="login_navbar">
+        {% if dark_mode %}
+        <a href="{% url 'home' %}"><img src="{% static 'images/arrow_back_white.png' %}" alt="Back"></a>
+        {% else %}
+        <a href="{% url 'home' %}"><img src="{% static 'images/arrow_back_purple.png' %}" alt="Back"></a>
+        {% endif %}
+        <h1 class="title">Login</h1>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" placeholder="Username...">
+        <input type="password" name="password" id="password" placeholder="Password...">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li><img src="{% static 'images/!.png' %}" alt="Erroe"> {{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="box__footer login__btn">
+            <button type="submit">Login</button>
+        </div>
+        <p class="login__signup">Have not signed up yet? <a href="{% url 'signup' %}">Sing up</a></p>
+    </form>
+</div>
+{% else %}
+<div class="box signup_box">
+    <div class="login_navbar">
+        {% if dark_mode %}
+        <a href="{% url 'home' %}"><img src="{% static 'images/arrow_back_white.png' %}" alt="Back"></a>
+        {% else %}
+        <a href="{% url 'home' %}"><img src="{% static 'images/arrow_back_purple.png' %}" alt="Back"></a>
+        {% endif %}
+        <h1 class="title">Sign up</h1>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <!-- <input type="text" name="username" id="username" placeholder="Username...">
+        <input type="password" name="password" id="password" placeholder="Password...">
+        <input type="password" name="con_password" id="password" placeholder="Confirm the password..."> -->
+        {% for field in forms %}
+        <label class="signup__labels">{{field.label}}</label>
+        {{field}}
+        {% endfor %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li><img src="{% static 'images/!.png' %}" alt="Erroe"> {{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="box__footer login__btn">
+            <button type="submit">Sign up</button>
+        </div>
+        <p class="login__signup">Already signed up? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+
+    {% endif %}
+</div>
+{% endblock %}

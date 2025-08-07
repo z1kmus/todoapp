@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="box">
+    <h1 class="title">Delete Note</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p class="warning__message">Are you sure want to delete '{{note.note}}' ?</p>
+        <div class="box__footer">
+            <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
